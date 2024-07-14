@@ -22,9 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index']);
@@ -47,6 +47,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/admin/all-product', 'allProduct')->name('allProduct');
         Route::get('/admin/add-product', 'addProduct')->name('addProduct');
+        Route::post('/admin/store-product', 'storeProduct')->name('storeProduct');
+        Route::get('/admin/edit-product/{id}', 'editProduct')->name('editProduct');
+        Route::post('/admin/update-product', 'updateProduct')->name('updateProduct');
+        Route::get('/admin/edit-image/{id}', 'editImage')->name('editImage');
+        Route::post('/admin/update-image', 'updateImage')->name('updateImage');
+        Route::get('/admin/delete-product/{id}', 'deleteProduct')->name('deleteProduct');
     });
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending-order', 'pendingOrder')->name('pendingOrder');
