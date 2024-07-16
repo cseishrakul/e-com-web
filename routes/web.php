@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Frontend\ClientController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +20,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/','index')->name('home');
+});
+Route::controller(ClientController::class)->group(function(){
+    Route::get('/category','category')->name('category');
+    Route::get('/shop','shop')->name('shop');
+    Route::get('/single-product','singleProduct')->name('singleProduct');
+    Route::get('/add-to-cart','addToCart')->name('addToCart');
+    Route::get('/checkout','checkout')->name('checkout');
+    Route::get('/user-profile','userProfile')->name('userProfile');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index']);
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/admin/all-category', 'allCategory')->name('allCategory');
         Route::get('/admin/add-category', 'addCategory')->name('addCategory');
