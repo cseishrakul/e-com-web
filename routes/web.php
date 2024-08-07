@@ -31,6 +31,7 @@ Route::controller(ClientController::class)->group(function(){
     Route::get('/add-to-cart','addToCart')->name('addToCart');
     Route::get('/checkout','checkout')->name('checkout');
     Route::get('/user-profile','userProfile')->name('userProfile');
+    Route::get('/category/{id}/{slug}','categoryPage')->name('category');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
