@@ -19,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/responsive.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/shop_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/shop_responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_responsive.css">
 
 </head>
 
@@ -85,7 +87,7 @@
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="{{route('home')}}">OneTech</a></div>
+                                <div class="logo"><a href="{{ route('home') }}">OneTech</a></div>
                             </div>
                         </div>
 
@@ -174,7 +176,8 @@
                                     <ul class="cat_menu">
                                         @foreach ($categories as $category)
                                             <li class="hassubs">
-                                                <a href="{{route('category',[$category->id,$category->slug])}}"> {{ $category->category_name }} <i
+                                                <a href="{{ route('category', [$category->id, $category->slug]) }}">
+                                                    {{ $category->category_name }} <i
                                                         class="fas fa-chevron-right"></i></a>
                                                 @if ($category->subcategories->count() > 0)
                                                     <ul>
@@ -221,7 +224,7 @@
                                             </ul>
                                         </li>
                                         <li class="hassubs">
-                                            <a href="{{route('shop')}}">Shop</a>
+                                            <a href="{{ route('shop') }}">Shop</a>
                                         </li>
                                         <li class="hassubs">
                                             <a href="#">Pages<i class="fas fa-chevron-down"></i></a>

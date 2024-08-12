@@ -21,17 +21,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::controller(HomeController::class)->group(function(){
-    Route::get('/','index')->name('home');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
 });
-Route::controller(ClientController::class)->group(function(){
-    Route::get('/category','category')->name('category');
-    Route::get('/shop','shop')->name('shop');
-    Route::get('/single-product','singleProduct')->name('singleProduct');
-    Route::get('/add-to-cart','addToCart')->name('addToCart');
-    Route::get('/checkout','checkout')->name('checkout');
-    Route::get('/user-profile','userProfile')->name('userProfile');
-    Route::get('/category/{id}/{slug}','categoryPage')->name('category');
+Route::controller(ClientController::class)->group(function () {
+    Route::get('/category', 'category')->name('category');
+    Route::get('/shop', 'shop')->name('shop');
+    Route::get('/single-product/{id}/{slug}', 'singleProduct')->name('singleProduct');
+    Route::get('/category/{id}/{slug}', 'categoryPage')->name('category');
+});
+
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::controller(ClientController::class)->group(function () {
+        Route::get('/add-to-cart', 'addToCart')->name('addToCart');
+        Route::post('/add-product-to-cart', 'addProductToCart')->name('addProductToCart');
+        Route::get('remove-cart-item/{id}', 'removeCartItem')->name('removeCartItem');
+        Route::get('get-shipping-address', 'shippingAddress')->name('shippingAddress');
+        Route::post('add-shipping-address', 'addShippingAddress')->name('addShippingAddress');
+        Route::get('/checkout', 'checkout')->name('checkout');
+        Route::post('place-order', 'placeOrder')->name('placeOrder');
+        Route::get('/user-profile', 'userProfile')->name('userProfile');
+        Route::get('/pending-orders', 'pendingOrders')->name('pendingOrders');
+    });
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

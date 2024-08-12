@@ -820,6 +820,7 @@
                             <p class="text-muted">Category: {{$product->product_category_name}} </p>
                             <p class="text-muted"> {{$product->product_short_des}} </p>
                             <p class="text-danger"> {{$product->price}} TK </p>
+                            <a href="{{route('singleProduct',[$product->id,$product->slug])}}" class="btn btn-outline-primary"> See More </a>
                         </div>
                     </div>
                 </div>
