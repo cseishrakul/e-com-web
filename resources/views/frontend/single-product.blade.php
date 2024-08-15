@@ -42,7 +42,7 @@
                                     <input type="hidden" name="price" value="{{$product->price}}">
                                     <div class="form-group">
                                         <label for="">Quantity</label>
-                                        <input type="number" name="quantity" min="1" class="form-control my-2" placeholder="1">
+                                        <input type="number" name="quantity" min="1" class="form-control my-2" placeholder="1" required>
                                     </div>
                                     <input type="submit" value="Add To Cart" class="btn btn-outline-dark" style="cursor: pointer">
                                 </div>

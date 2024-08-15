@@ -102,6 +102,11 @@
                                     <span class="sub-item">Pending Order</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{route('approvedOrder')}}">
+                                    <span class="sub-item">Confirmed Order</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -12,7 +12,7 @@
                         </li>
                         <hr>
                         <li class="nav-item">
-                            <a href="{{route('pendingOrders')}}" class="nav-link">Pending Orders</a>
+                            <a href="{{ route('pendingOrders') }}" class="nav-link">Pending Orders</a>
                         </li>
                         <hr>
                         <li class="nav-item">
@@ -22,13 +22,19 @@
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button class="btn btn-outline-danger" type="submit" style="cursor: pointer">Logout</button>
+                                <button class="btn btn-outline-danger" type="submit"
+                                    style="cursor: pointer">Logout</button>
                             </form>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-9">Dashboard</div>
+            <div class="col-md-9">
+                @if (session()->has('message'))
+                    <div class="alert alert-success"> {{ session()->get('message') }} </div>
+                @endif
+                Pending Orders
+            </div>
         </div>
     </div>
 @endsection

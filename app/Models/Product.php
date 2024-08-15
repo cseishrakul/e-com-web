@@ -20,4 +20,7 @@ class Product extends Model
         'product_image',
         'slug'
     ];
+    public function orders(){
+        return $this->hasMany(Order::class,'product_id');
+    }
 }

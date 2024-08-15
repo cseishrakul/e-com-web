@@ -31,7 +31,7 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'categoryPage')->name('category');
 });
 
-Route::middleware(['auth', 'role:user'])->group(function () {
+Route::middleware(['auth', 'role:user', 'verified'])->group(function () {
     Route::controller(ClientController::class)->group(function () {
         Route::get('/add-to-cart', 'addToCart')->name('addToCart');
         Route::post('/add-product-to-cart', 'addProductToCart')->name('addProductToCart');
@@ -42,6 +42,13 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('place-order', 'placeOrder')->name('placeOrder');
         Route::get('/user-profile', 'userProfile')->name('userProfile');
         Route::get('/pending-orders', 'pendingOrders')->name('pendingOrders');
+        // Aamerpay payment
+        Route::get('payment', [\App\Http\Controllers\paymentController::class, 'payment'])->name('payment');
+
+        //You need declear your success & fail route in "app\Middleware\VerifyCsrfToken.php"
+        Route::post('success', [\App\Http\Controllers\paymentController::class, 'success'])->name('success');
+        Route::post('fail', [\App\Http\Controllers\paymentController::class, 'fail'])->name('fail');
+        Route::get('cancel', [\App\Http\Controllers\paymentController::class, 'cancel'])->name('cancel');
     });
 });
 
@@ -75,6 +82,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending-order', 'pendingOrder')->name('pendingOrder');
+        Route::post('/admin/confirm-order/{id}', 'confirmOrder')->name('confirmOrder');
+        Route::get('/admin/confirmed-order', 'approvedOrder')->name('approvedOrder');
+        Route::get('/admin/invoice/view/{id}', 'invoice')->name('viewInvoice');
+        Route::get('/admin/generate-invoice/{id}', 'generateInvoice')->name('generateInvoice');
     });
 });
 

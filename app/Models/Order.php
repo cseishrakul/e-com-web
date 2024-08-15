@@ -16,4 +16,15 @@ class Order extends Model
         'product_name',
         'quantity'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function user_info(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+    public function product_info(){
+        return $this->belongsTo(Product::class,'product_id');
+    }
 }

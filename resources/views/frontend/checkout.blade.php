@@ -43,10 +43,14 @@
                 </tbody>
             </table>
             <div class="row">
-                <div class="col-md-2">
-                    <form action="{{route('placeOrder')}}">
-                        <input type="submit" value="Place Order" class="btn btn-primary" style="cursor: pointer">
+                <div class="col-md-3">
+                    <form action="{{route('placeOrder')}}" method="POST">
+                        @csrf
+                        <input type="submit" value="Cash On Delivery" class="btn btn-primary" style="cursor: pointer">
                     </form>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{route('payment')}}" class="btn btn-warning">Online Pay</a>
                 </div>
                 <div class="col-md-2">
                     <form action="">
